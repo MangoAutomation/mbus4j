@@ -3,12 +3,11 @@
     <parent>
         <groupId>net.sf.mbus4j</groupId>
         <artifactId>mbus4j</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-custom.1</version>
     </parent>
 
     <groupId>net.sf.mbus4j</groupId>
     <artifactId>mbus4j-core</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>mbus4j-core</name>
 

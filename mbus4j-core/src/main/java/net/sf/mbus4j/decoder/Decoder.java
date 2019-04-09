@@ -141,7 +141,7 @@ public class Decoder {
                         setState(DecodeState.LONG_LENGTH_1);
                         return;
                     case 0x10:
-                        dataPos = -1;
+                        dataPos = -2;
                         parsingFrame = null;
                         start = b;
                         expectedLengt = 2;

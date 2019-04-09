@@ -258,15 +258,15 @@ public class Slave
     public boolean willHandleRequest(Frame frame) {
         if (frame instanceof SelectionOfSlaves) {
             SelectionOfSlaves selectionOfSlaves = (SelectionOfSlaves) frame;
-            log.log(Level.INFO, "will handle SelectionOfSlaves: {0}", (selectionOfSlaves.getAddress() & 0xFF) == MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS);
+            log.log(Level.INFO, "will handle SelectionOfSlaves: {0}", (selectionOfSlaves.getAddress() & (byte)0xFF) == MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS);
 
-            return (selectionOfSlaves.getAddress() & 0xFF) == MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS;
+            return (selectionOfSlaves.getAddress() & (byte)0xFF) == MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS;
         } else if (frame instanceof PrimaryAddress) {
-            int primaryAddress = ((PrimaryAddress) frame).getAddress() & 0xFF;
+            int primaryAddress = ((PrimaryAddress) frame).getAddress() & (byte)0xFF;
 
             return willHandleByAddress(primaryAddress);
         } else if (frame instanceof RequestClassXData) {
-            int primaryAddress = ((RequestClassXData) frame).getAddress() & 0xFF;
+            int primaryAddress = ((RequestClassXData) frame).getAddress() & (byte)0xFF;
 
             return willHandleByAddress(primaryAddress);
         } else {
@@ -275,7 +275,7 @@ public class Slave
     }
 
     Frame handleSelectionOfSlaves(SelectionOfSlaves selectionOfSlaves) {
-        if ((selectionOfSlaves.getAddress() & 0xFF) != MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS) {
+        if ((selectionOfSlaves.getAddress() & (byte)0xFF) != MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS) {
             log.warning("NETWORK SELECT ERROR");
 
             return null;
@@ -323,7 +323,7 @@ public class Slave
     private boolean willHandleByAddress(int primaryAddress) {
         return (primaryAddress == MBusUtils.BROADCAST_NO_ANSWER_PRIMARY_ADDRESS)
                 || (primaryAddress == MBusUtils.BROADCAST_WITH_ANSWER_PRIMARY_ADDRESS)
-                || (primaryAddress == (getAddress() & 0xFF))
+                || (primaryAddress == (getAddress() & (byte)0xFF))
                 || ((primaryAddress == MBusUtils.SLAVE_SELECT_PRIMARY_ADDRESS) && isNetworkSelected());
     }
 
